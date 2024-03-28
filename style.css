@@ -1,0 +1,150 @@
+body{
+    background-color: blanchedalmond;
+    background-image: linear-gradient(rgb(228, 218, 202), rgb(239, 201, 193));
+}
+
+nav{
+    background-color:rgb(237, 222, 202);
+}
+.card-img-top {
+    max-width: 20%;
+    height: auto;
+}
+.btn {
+    margin-top: 10px;
+}
+
+.product-info { 
+    background-color: rgb(210, 191, 191);
+    margin-top: 48px;
+}
+
+.product-info .card {
+    margin-top: 10px;
+}
+
+input:invalid {
+    background-color: ivory;
+    border: none;
+    outline: 2px solid red;
+    border-radius: 5px;
+  }
+
+  .box {
+    border: 2px solid rgb(210, 199, 221);
+    background-color: #cccccc;
+    background-image: linear-gradient(rgb(237, 200, 200), rgb(201, 198, 187));
+    padding: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: -20%;
+    max-width: 300px;
+    height: auto;
+    text-align: center;
+    }
+
+    .inline {
+        display: block;
+
+      }
+
+    .inline p{
+        margin: 3px;
+    }
+
+  .container{
+    text-align: start;
+    align-content: center;
+  }
+
+  table{
+    width: 100%;
+    text-align: center;
+  }
+
+  table, th, td {
+    border:1px solid black;
+  }
+
+  th#th-prod {
+    width: 33%;
+  }
+  th#th-quant {
+    width: 27%;
+  }
+  th#th-price {
+    width: 16%;
+  }
+  th#th-totprice {
+    width: 16%;
+  }
+  th#th-rm-btn {
+    width: auto;
+  }
+
+/*
+  <th id="lh-prod">Produkt</th>
+              <th id="lh-quant">Antal</th>
+              <th id="lh-price">Pris</th>
+              <th id="lh-totprice">Total pris</th>
+              <th id="lh-rm-btn">Ta bort</th>*/
+
+  #kund-btn-right{
+    position: relative;
+    /*
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    margin: 2rem;*/
+  }
+
+  .offcanvas{
+    background-color: blanchedalmond;
+  }
+
+  @media screen and (width > 480px) {
+    #cart-btn{
+
+        
+        /*border-radius: 45%;
+        /*padding: 12px 12px;*/
+        font-size: 18px;
+    }
+  }
+
+  @media screen and (420 < width >= 480px) {
+    #cart-btn{
+
+        font-size: 16px;
+        border-radius: 12px;
+        
+    }
+  }
+
+  @media screen and (351px < width <= 420px) {
+    #cart-btn{
+
+        font-size: 12px;
+    }
+  }
+
+
+  @media screen and (width <= 350px) {
+    #cart-btn{
+
+        font-size: 10px;
+        /*padding: 10px;*/
+    }
+  }
+
+
+
+    #cart-btn{
+
+        color: rgb(62, 96, 54);
+        background-color: rgb(212, 200, 182);
+        border: none;
+        border-radius: 50%;
+    }
+
