@@ -6,7 +6,7 @@
     image: " "
   };*/
 
-  const cart = [];
+let cart = [];
 
 
 let orderButton = document.getElementById("order-btn");
@@ -19,63 +19,54 @@ orderButton.addEventListener('click', () => {
 let emptyCartBtn = document.getElementById('empty-cart-btn');
 emptyCartBtn.addEventListener('click', emptyCart);
 
-/*
-let prodMinusBtn = document.getElementById('quatity-minus-btn');
-let prodPlusBtn = document.getElementById('quatity-plus-btn');
-
-prodMinusBtn.addEventListener('click', changeQuantity);
-prodPlusBtn.addEventListener('click', changeQuantity);
-
-
-
-function changeQuantity(event){
-    if(event.target.id == 'quatity-minus-btn'){
-        let antal = getQuantity();
-        if(antal>0) setQuantity(antal-1);
-    }
-    else{
-        let antal = getQuantity();
-        setQuantity(antal+1);
-    }
-}
-
-function getQuantity(){
-    let antalStr = document.getElementById('prod-quantity').innerText;
-    let antal = parseInt(antalStr);
-    console.log("Antal: " + antal);
-    return antal;
-}
-
-function setQuantity(nyAntal){
-    let antal = document.getElementById('prod-quantity');
-    console.log("ny antal: " + nyAntal);
-    antal.innerText = nyAntal.toString();
-}*/
-
 function emptyCart(){
 
     const table = document.getElementById("cart-table");
     while(table.rows.length>1){
         table.deleteRow(1);
     }
+
+    cart.forEach((c) => resetAddButtons(c.id));
+    cart = [];
 }
 
 function removeItemFromCart(event){
 
+    const idArray = event.target.id.split(" ");
+    let id = parseInt(idArray[1]);
     //----Array cart--------
+    console.log("cart Före");
+    //console.log(cart);
+    cart.forEach((c) => console.log(c.id));
 
+    const indexToRemove = cart.findIndex((item) => item.id == id);
+    cart.splice(indexToRemove, 1);
+    console.log("Remove: " + indexToRemove);
+
+    resetAddButtons(id);
+
+    console.log("cart Efter");
+    //console.log(cart);
+    cart.forEach((c) => console.log(c.id));
 
     //--------------------------
     
     //-----Tabellen-------
-    const idArray = event.target.id.split(" ");
+    
     var row = document.getElementById(idArray[1]);
     row.parentNode.removeChild(row);
 }
 
+function resetAddButtons(id){
+
+    let card = document.getElementById("card " + id);
+    card.querySelector('.btn').disabled = false;
+    card.querySelector('.btn').textContent = 'Lägg till';
+    card.querySelector('.btn').style.backgroundColor="blue";
+}
+
 function addItemToCart(product){
 
-    alert(product.title + " har lagts till i varukorgen.");
     //--------cart Array-----------
     let item = {
         id: product.id,
@@ -92,6 +83,7 @@ function addItemToCart(product){
     //-----------Tabellen---------------
     const table = document.getElementById("cart-table");
     // Kolla om produkten finns redan i kundkorg annars skapa ny
+    
     let newRow = table.insertRow();
     newRow.setAttribute('id', product.id);
     for(let i=0; i<5; i++){
@@ -103,6 +95,7 @@ function addItemToCart(product){
     addQuantButtons(x[1], product.id);
     x[2].innerText = "$" + product.price;
     x[3].innerText = "$" + product.price;
+    x[3].setAttribute('id', "tot-pris " + product.id);
    // x[4].innerText = "X";
 
     const removeButton = document.createElement('button');
@@ -110,7 +103,9 @@ function addItemToCart(product){
     removeButton.setAttribute('type', "button");
     removeButton.classList.add('btn-close');
     x[4].appendChild(removeButton);
-    removeButton. addEventListener('click', removeItemFromCart)
+    removeButton.addEventListener('click', removeItemFromCart);
+
+    //alert(product.title + " har lagts till i varukorgen.");
 }
 
 function addQuantButtons(cell,prodId){
@@ -132,34 +127,49 @@ function addQuantButtons(cell,prodId){
     plusButton.textContent = '+';
     cell.appendChild(plusButton);
 
-    minusButton.addEventListener('click', changeQuantityNy);
-    plusButton.addEventListener('click', changeQuantityNy);
+    minusButton.addEventListener('click', changeQuantity);
+    plusButton.addEventListener('click', changeQuantity);
 }
 
-function changeQuantityNy(event){
+function changeQuantity(event){
     const idArray = event.target.id.split(" ");
+    let prodId = idArray[1];
     const prodQuantId = 'prod-quantity ' + idArray[1];
-    let antal = getQuantityNy(prodQuantId);
+    let antal = getQuantity(prodQuantId);
     if(idArray[0] == 'quatity-minus-btn'){
         if(antal>1){
-         setQuantityNy(prodQuantId, antal-1); //Ändra Local storage oxå
+         setQuantity(prodId, antal-1); //Ändra Local storage oxå
         }
     }
     else{
-        setQuantityNy(prodQuantId, antal+1);       //Ändra Local storage oxå
+        setQuantity(prodId, antal+1);       //Ändra Local storage oxå
     }
 }
 
-function getQuantityNy(prodQuantId){
+function getQuantity(prodQuantId){
     let antalStr = document.getElementById(prodQuantId).innerText;
     let antal = parseInt(antalStr);
-    console.log("Antal: " + antal);
+    //console.log("Antal: " + antal);
     return antal;
 }
 
-function setQuantityNy(prodQuantId, nyAntal){
-    let antal = document.getElementById(prodQuantId);
-    console.log("ny antal: " + nyAntal);
-    antal.innerText = nyAntal.toString();
-}
+function setQuantity(prodId, nyAntal){
+    const prodQuantId = 'prod-quantity ' + prodId;
 
+    //------Array-------------
+    let itemIndex = cart.findIndex((item) => item.id == parseInt(prodId));
+    cart[itemIndex].antal=nyAntal;
+
+    //------Table----------
+    let antal = document.getElementById(prodQuantId);
+    //console.log("ny antal: " + nyAntal);
+    antal.innerText = nyAntal.toString();
+
+    let totPriceStr = document.getElementById("tot-pris " + prodId);
+    let totPrice = (nyAntal*cart[itemIndex].price).toFixed(2);
+    totPriceStr.innerText = "$" + totPrice.toString();
+
+    
+
+     
+}

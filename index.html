@@ -45,8 +45,8 @@
       </div>
     </nav>
     
-    <!-- Sidebar -->
-  <div class="offcanvas offcanvas-end offcanvas-size-xl" id="kundkorg">
+    <!-- Sidebar offcanvas-size-xl-->
+  <div class="offcanvas offcanvas-end " id="kundkorg">
     <div class="offcanvas-header">
       <h1 class="offcanvas-title">Kundkorg</h1>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
@@ -56,28 +56,10 @@
             <tr id="t-header">
               <th id="th-prod">Produkt</th>
               <th id="th-quant">Antal</th>
-              <th id="th-price">Pris</th>
-              <th id="th-totprice">Total pris</th>
+              <th id="th-price">&#xE0 Pris</th>
+              <th id="th-totprice">Pris</th>
               <th id="th-rm-btn">Ta bort</th>
             </tr>
-            <!--tr>
-              <td>Bok</td>
-              <td>
-                <button id="quatity-minus-btn" type="button" class="btn btn-secondary btn-sm m-1">-</button>
-                <span id="prod-quantity">2</span>
-                <button id="quatity-plus-btn" type="button" class="btn btn-secondary btn-sm m-1">+</button>
-              </td>
-              <td>$5</td>
-              <td>$10</td>
-              <th><button type="button" class="btn-close"></button></th>
-            </tr>
-            <tr>
-              <td>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</td>
-              <td>1</td>
-              <td>$10</td>
-              <td>$10</td>
-              <th><button type="button" class="btn-close"></button></th>
-            </tr-->
           </table>
       <button id="empty-cart-btn" class="btn btn-warning" type="button">Töm varukorgen</button>
       <button id="order-btn" class="btn btn-primary" type="button">Beställ</button>
@@ -87,7 +69,7 @@
 
     <div id="kund-btn-right">
         <h1 class="text-center">Webshop</h1>
-        <!-- Button to open the offcanvas sidebar  &#x1F6D2-->
+        <!-- Button to open the offcanvas sidebar-->
         <div style="position: absolute; right: 0; top: 0;">
             <button id="cart-btn"  type="button" data-bs-toggle="offcanvas" data-bs-target="#kundkorg">
                 <img src="images/shopping_cart.png" width="60">

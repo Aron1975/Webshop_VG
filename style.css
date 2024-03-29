@@ -60,6 +60,7 @@ input:invalid {
   table{
     width: 100%;
     text-align: center;
+    font-size: 16px;
   }
 
   table, th, td {
@@ -67,16 +68,16 @@ input:invalid {
   }
 
   th#th-prod {
-    width: 33%;
+    width: 40%;
   }
   th#th-quant {
-    width: 27%;
+    width: 18%;
   }
   th#th-price {
-    width: 16%;
+    width: 17%;
   }
   th#th-totprice {
-    width: 16%;
+    width: 18%;
   }
   th#th-rm-btn {
     width: auto;
@@ -101,6 +102,21 @@ input:invalid {
 
   .offcanvas{
     background-color: blanchedalmond;
+    width: 50% !important;
+  }
+
+  @media screen and (768px <= width < 1024px){
+
+    .offcanvas {
+      width: 75% !important;
+    }
+  }
+
+  @media screen and (width < 768px){
+
+    .offcanvas {
+      width: 100% !important;
+    }
   }
 
   @media screen and (width > 480px) {

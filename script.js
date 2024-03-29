@@ -10,6 +10,7 @@ fetch('https://fakestoreapi.com/products')
 
         products.forEach(product => {
             const productCard = document.createElement('div');
+            productCard.setAttribute('id', "card " + product.id);
             productCard.classList.add('card', 'mb-3');
 
             const basicInfoSection = document.createElement('div');
@@ -56,9 +57,13 @@ fetch('https://fakestoreapi.com/products')
             const addButton = document.createElement('button');
             addButton.classList.add('btn', 'btn-primary');
             addButton.textContent = 'Lägg till';
+            addButton.style.backgroundColor="blue";
 
             addButton.addEventListener("click", () => {
                 addItemToCart(product);
+                addButton.textContent = 'Tillagt';
+                addButton.disabled = true;
+                addButton.style.backgroundColor="green";
             });
 
             additionalInfoSection.appendChild(productDescription);
