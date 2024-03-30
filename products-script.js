@@ -169,7 +169,4 @@ function setQuantity(prodId, nyAntal){
     let totPrice = (nyAntal*cart[itemIndex].price).toFixed(2);
     totPriceStr.innerText = "$" + totPrice.toString();
 
-    
-
-     
 }
