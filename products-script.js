@@ -28,6 +28,7 @@ function emptyCart(){
 
     cart.forEach((c) => resetAddButtons(c.id));
     cart = [];
+    updateTotalItemsAndPrice();
 }
 
 function removeItemFromCart(event){
@@ -55,6 +56,7 @@ function removeItemFromCart(event){
     
     var row = document.getElementById(idArray[1]);
     row.parentNode.removeChild(row);
+    updateTotalItemsAndPrice();
 }
 
 function resetAddButtons(id){
@@ -169,7 +171,23 @@ function setQuantity(prodId, nyAntal){
     let totPriceStr = document.getElementById("tot-pris " + prodId);
     let totPrice = (nyAntal*cart[itemIndex].price).toFixed(2);
     totPriceStr.innerText = "$" + totPrice.toString();
+
+    updateTotalItemsAndPrice();
 }
 
-updateTotalItemsAndPrice();
+function updateTotalItemsAndPrice(){
+
+    const sumAntal = cart.map(item => item.antal).reduce((result, item) => {
+        return result + item},0);
+
+    const sumPrice = cart.map(item => item.antal).reduce((sum, value, i) => sum + (value * cart.map(item => item.price)[i]), 0).toFixed(2);
+
+    console.log("Antal: " + sumAntal + " Tot Price: " + sumPrice);
+
+    
+    let totAntal = document.getElementById("th-cart-total-antal");
+    let totPrice = document.getElementById("th-cart-total-price");
+    totAntal.innerText = sumAntal.toString();
+    totPrice.innerText = "$" + sumPrice.toString();
+}
 
