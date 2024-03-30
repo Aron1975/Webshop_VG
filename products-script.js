@@ -69,6 +69,10 @@ function resetAddButtons(id){
 
 function addItemToCart(product){
 
+    //-----rullgardin antal-----------
+    let antalItem = parseInt(document.getElementById('form-select ' + product.id).value);
+    console.log("Antal: " + antalItem);
+
     //--------cart Array-----------
     let item = {
         id: product.id,
@@ -76,7 +80,7 @@ function addItemToCart(product){
         price: product.price,
         info: product.description,
         image: product.image,
-        antal: 1    //Ändra till rätt inläst antal
+        antal: antalItem    //Ändra till rätt inläst antal!! FIXED??
     }
     cart.push(item);
     console.log(cart);
@@ -94,9 +98,9 @@ function addItemToCart(product){
     var x = newRow.cells;
     x[0].innerText = product.title;
    // x[1].innerText = "1";
-    addQuantButtons(x[1], product.id);
+    addQuantButtons(x[1], product.id, antalItem);
     x[2].innerText = "$" + product.price;
-    x[3].innerText = "$" + product.price;
+    x[3].innerText = "$" + product.price*antalItem;
     x[3].setAttribute('id', "tot-pris " + product.id);
    // x[4].innerText = "X";
 
@@ -111,7 +115,7 @@ function addItemToCart(product){
     //alert(product.title + " har lagts till i varukorgen.");
 }
 
-function addQuantButtons(cell,prodId){
+function addQuantButtons(cell,prodId,antal){
 
     const minusButton = document.createElement('button');
     minusButton.setAttribute('id', "quatity-minus-btn " + prodId);
@@ -121,7 +125,7 @@ function addQuantButtons(cell,prodId){
 
     const antalSpan = document.createElement('span');
     antalSpan.setAttribute('id', "prod-quantity " + prodId);  
-    antalSpan.textContent = "1"; //Ändra till antal satt vid tilläggning
+    antalSpan.textContent = antal; //Ändra till antal satt vid tilläggning
     cell.appendChild(antalSpan);
 
     const plusButton = document.createElement('button');
