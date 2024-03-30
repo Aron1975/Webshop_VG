@@ -105,6 +105,7 @@ function addItemToCart(product){
     x[4].appendChild(removeButton);
     removeButton.addEventListener('click', removeItemFromCart);
 
+    updateTotalItemsAndPrice();
     //alert(product.title + " har lagts till i varukorgen.");
 }
 
@@ -168,5 +169,7 @@ function setQuantity(prodId, nyAntal){
     let totPriceStr = document.getElementById("tot-pris " + prodId);
     let totPrice = (nyAntal*cart[itemIndex].price).toFixed(2);
     totPriceStr.innerText = "$" + totPrice.toString();
-
 }
+
+updateTotalItemsAndPrice();
+
