@@ -6,21 +6,22 @@ let cart = [];
     if (webshopCart != null){
         webshopCart.forEach(item => {addItemToCart(item, "ls");
         });
-    } cart = webshopCart; 
+    } 
+    //cart = webshopCart; 
     console.log(cart);
 })();
 
 let orderButton = document.getElementById("order-btn");
 orderButton.addEventListener('click', () => {
-        //      localStorage.setItem("prodId", product.id);
-        //     window.location.href = `beställning.html?productId=${product.id}`;
-        alert("Beställ");
+            //window.location.href = `beställning.html?productId=${product.id}`;
+            window.location.href = `beställning.html`;
+       // alert("Beställ");
     });
 
 let emptyCartBtn = document.getElementById('empty-cart-btn');
 emptyCartBtn.addEventListener('click', emptyCart);
 
-// Addar element tall varukorg, inputType avgör om den läggs till från LocalStorage eller via websidan.
+// Addar element till varukorg, inputType avgör om den läggs till från LocalStorage('ls') eller via websidan('ws').
 function addItemToCart(product, inputType){
 
     let item = {};
@@ -83,18 +84,6 @@ function addItemToCart(product, inputType){
     //alert(product.title + " har lagts till i varukorgen.");
     
 }
-
-/*
-function disableOrderButtonsForItemsInCart(produktId){
-
-    let card = document.getElementById("card " + product.id);
-    card.querySelector('.btn').disabled = true;
-    card.querySelector('.btn').textContent = 'Tillagt';
-    card.querySelector('.btn').style.backgroundColor="green";
-    
-}*/
-
-
 
 function emptyCart(){
 

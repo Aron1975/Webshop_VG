@@ -3,6 +3,21 @@ body{
     background-image: linear-gradient(rgb(228, 218, 202), rgb(239, 201, 193));
 }
 
+.sum-body{
+  background-image: none;
+  background-color: rgb(200, 201, 202);
+  align-items: center;
+  text-align: center;
+}
+
+p.medium-size{
+  font-size: 20px;
+}
+
+.sum-body a{
+  color:peru;
+}
+
 nav{
     background-color:rgb(237, 222, 202);
 }
@@ -33,7 +48,7 @@ input:invalid {
   .box {
     border: 2px solid rgb(210, 199, 221);
     background-color: #cccccc;
-    background-image: linear-gradient(rgb(237, 200, 200), rgb(201, 198, 187));
+    background-image: linear-gradient(rgb(184, 224, 222), rgb(166, 188, 202));
     padding: 10px;
     margin-left: 20%;
     margin-right: 20%;
@@ -83,21 +98,8 @@ input:invalid {
     width: auto;
   }
 
-/*
-  <th id="lh-prod">Produkt</th>
-              <th id="lh-quant">Antal</th>
-              <th id="lh-price">Pris</th>
-              <th id="lh-totprice">Total pris</th>
-              <th id="lh-rm-btn">Ta bort</th>*/
-
   #kund-btn-right{
     position: relative;
-    /*
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    margin: 2rem;*/
   }
 
   .offcanvas{
@@ -121,10 +123,6 @@ input:invalid {
 
   @media screen and (width > 480px) {
     #cart-btn{
-
-        
-        /*border-radius: 45%;
-        /*padding: 12px 12px;*/
         font-size: 18px;
     }
   }
@@ -150,7 +148,6 @@ input:invalid {
     #cart-btn{
 
         font-size: 10px;
-        /*padding: 10px;*/
     }
   }
 

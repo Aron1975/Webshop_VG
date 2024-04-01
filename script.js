@@ -60,7 +60,7 @@ fetch('https://fakestoreapi.com/products')
             addButton.classList.add('btn', 'btn-primary');
 
             
-            if(wsCart.some(i => i.id == product.id)){
+            if(wsCart!=null && wsCart.some(i => i.id == product.id)){
 
                 addButton.textContent = 'Tillagt';
                 addButton.disabled = true;
