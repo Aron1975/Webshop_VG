@@ -7,6 +7,7 @@ fetch('https://fakestoreapi.com/products')
     })
     .then(products => {
         const productListContainer = document.getElementById('product-list');
+        let wsCart = JSON.parse(localStorage.getItem("webshopCart"));
 
         products.forEach(product => {
             const productCard = document.createElement('div');
@@ -57,11 +58,24 @@ fetch('https://fakestoreapi.com/products')
 
             const addButton = document.createElement('button');
             addButton.classList.add('btn', 'btn-primary');
+
+            
+            if(wsCart.some(i => i.id == product.id)){
+
+                addButton.textContent = 'Tillagt';
+                addButton.disabled = true;
+                addButton.style.backgroundColor="green";
+
+            }
+            else{
+
             addButton.textContent = 'Lägg till';
             addButton.style.backgroundColor="blue";
+            addButton.disabled = false;
+            }
 
             addButton.addEventListener("click", () => {
-                addItemToCart(product);
+                addItemToCart(product, "ws");
                 addButton.textContent = 'Tillagt';
                 addButton.disabled = true;
                 addButton.style.backgroundColor="green";
@@ -77,7 +91,8 @@ fetch('https://fakestoreapi.com/products')
 
             productCard.addEventListener('mouseenter', () => {
                 additionalInfoSection.style.display = 'block';
-                productImage.style.maxWidth = "fit-content";
+               // productImage.style.maxWidth = "fit-content";
+                productImage.style.maxWidth = "50%";
             });
 
             productCard.addEventListener('mouseleave', () => {
@@ -91,21 +106,3 @@ fetch('https://fakestoreapi.com/products')
     .catch(error => {
         console.error('There was a problem with your fetch operation1:', error);
     });
-
-    
-
- /*   function addItemToCart(product){
-
-        alert("Add to Cart: " + product.id + " Price: " + product.price);
-
-        const table = document.getElementById("cart-table");
-        table.deleteRow(1);
-    }*/
-
-/*
-    let orderButton = document.getElementById("order-btn");
-    orderButton.addEventListener('click', () => {
-          //      localStorage.setItem("prodId", product.id);
-           //     window.location.href = `beställning.html?productId=${product.id}`;
-           alert("Beställ");
-     });*/

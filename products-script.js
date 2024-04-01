@@ -1,13 +1,14 @@
-/*const item = {
-    id: 1,
-    name: "Item",
-    price: 1,
-    info: "Info",
-    image: " "
-  };*/
-
 let cart = [];
 
+(function () {
+
+    let webshopCart = JSON.parse(localStorage.getItem("webshopCart"));
+    if (webshopCart != null){
+        webshopCart.forEach(item => {addItemToCart(item, "ls");
+        });
+    } cart = webshopCart; 
+    console.log(cart);
+})();
 
 let orderButton = document.getElementById("order-btn");
 orderButton.addEventListener('click', () => {
@@ -19,6 +20,82 @@ orderButton.addEventListener('click', () => {
 let emptyCartBtn = document.getElementById('empty-cart-btn');
 emptyCartBtn.addEventListener('click', emptyCart);
 
+// Addar element tall varukorg, inputType avgör om den läggs till från LocalStorage eller via websidan.
+function addItemToCart(product, inputType){
+
+    let item = {};
+
+    if(inputType == "ws"){
+
+        //-----rullgardin antal-----------
+        let antalItem = parseInt(document.getElementById('form-select ' + product.id).value);
+
+        //--------cart Array-----------
+        item = {
+            id: product.id,
+            name: product.title,
+            price: product.price,
+            info: product.description,
+            image: product.image,
+            antal: antalItem
+        }
+    }
+    else{
+        item = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            info: product.info,
+            image: product.image,
+            antal: product.antal
+        }
+    }
+
+    cart.push(item);
+    console.log(cart);
+    
+    //------------------------------
+
+    //-----------Tabellen---------------
+    const table = document.getElementById("cart-table");
+    
+    let newRow = table.insertRow();
+    newRow.setAttribute('id', product.id);
+    for(let i=0; i<5; i++){
+        newRow.insertCell(i);
+    }
+    var x = newRow.cells;
+    x[0].innerText = item.name;
+    addQuantButtons(x[1], item.id, item.antal);
+    x[2].innerText = "$" + item.price;
+    x[3].innerText = "$" + item.price*item.antal;
+    x[3].setAttribute('id', "tot-pris " + item.id);
+
+    const removeButton = document.createElement('button');
+    removeButton.setAttribute('id', "rm-btn " + item.id);
+    removeButton.setAttribute('type', "button");
+    removeButton.classList.add('btn-close');
+    x[4].appendChild(removeButton);
+    removeButton.addEventListener('click', removeItemFromCart);
+
+    updateTotalItemsAndPrice();
+    saveToLocalStorage();
+    //alert(product.title + " har lagts till i varukorgen.");
+    
+}
+
+/*
+function disableOrderButtonsForItemsInCart(produktId){
+
+    let card = document.getElementById("card " + product.id);
+    card.querySelector('.btn').disabled = true;
+    card.querySelector('.btn').textContent = 'Tillagt';
+    card.querySelector('.btn').style.backgroundColor="green";
+    
+}*/
+
+
+
 function emptyCart(){
 
     const table = document.getElementById("cart-table");
@@ -29,90 +106,35 @@ function emptyCart(){
     cart.forEach((c) => resetAddButtons(c.id));
     cart = [];
     updateTotalItemsAndPrice();
+    saveToLocalStorage();
 }
 
 function removeItemFromCart(event){
 
     const idArray = event.target.id.split(" ");
     let id = parseInt(idArray[1]);
-    //----Array cart--------
-    console.log("cart Före");
-    //console.log(cart);
-    cart.forEach((c) => console.log(c.id));
 
+    //----Array cart--------
     const indexToRemove = cart.findIndex((item) => item.id == id);
     cart.splice(indexToRemove, 1);
-    console.log("Remove: " + indexToRemove);
 
     resetAddButtons(id);
-
-    console.log("cart Efter");
-    //console.log(cart);
-    cart.forEach((c) => console.log(c.id));
-
-    //--------------------------
     
     //-----Tabellen-------
     
     var row = document.getElementById(idArray[1]);
     row.parentNode.removeChild(row);
     updateTotalItemsAndPrice();
+    saveToLocalStorage();
 }
 
 function resetAddButtons(id){
 
+    console.log("card " + id);
     let card = document.getElementById("card " + id);
     card.querySelector('.btn').disabled = false;
     card.querySelector('.btn').textContent = 'Lägg till';
     card.querySelector('.btn').style.backgroundColor="blue";
-}
-
-function addItemToCart(product){
-
-    //-----rullgardin antal-----------
-    let antalItem = parseInt(document.getElementById('form-select ' + product.id).value);
-    console.log("Antal: " + antalItem);
-
-    //--------cart Array-----------
-    let item = {
-        id: product.id,
-        name: product.title,
-        price: product.price,
-        info: product.description,
-        image: product.image,
-        antal: antalItem    //Ändra till rätt inläst antal!! FIXED??
-    }
-    cart.push(item);
-    console.log(cart);
-    //------------------------------
-
-    //-----------Tabellen---------------
-    const table = document.getElementById("cart-table");
-    // Kolla om produkten finns redan i kundkorg annars skapa ny
-    
-    let newRow = table.insertRow();
-    newRow.setAttribute('id', product.id);
-    for(let i=0; i<5; i++){
-        newRow.insertCell(i);
-    }
-    var x = newRow.cells;
-    x[0].innerText = product.title;
-   // x[1].innerText = "1";
-    addQuantButtons(x[1], product.id, antalItem);
-    x[2].innerText = "$" + product.price;
-    x[3].innerText = "$" + product.price*antalItem;
-    x[3].setAttribute('id', "tot-pris " + product.id);
-   // x[4].innerText = "X";
-
-    const removeButton = document.createElement('button');
-    removeButton.setAttribute('id', "rm-btn " + product.id);
-    removeButton.setAttribute('type', "button");
-    removeButton.classList.add('btn-close');
-    x[4].appendChild(removeButton);
-    removeButton.addEventListener('click', removeItemFromCart);
-
-    updateTotalItemsAndPrice();
-    //alert(product.title + " har lagts till i varukorgen.");
 }
 
 function addQuantButtons(cell,prodId,antal){
@@ -125,7 +147,7 @@ function addQuantButtons(cell,prodId,antal){
 
     const antalSpan = document.createElement('span');
     antalSpan.setAttribute('id', "prod-quantity " + prodId);  
-    antalSpan.textContent = antal; //Ändra till antal satt vid tilläggning
+    antalSpan.textContent = antal;
     cell.appendChild(antalSpan);
 
     const plusButton = document.createElement('button');
@@ -145,18 +167,17 @@ function changeQuantity(event){
     let antal = getQuantity(prodQuantId);
     if(idArray[0] == 'quatity-minus-btn'){
         if(antal>1){
-         setQuantity(prodId, antal-1); //Ändra Local storage oxå
+         setQuantity(prodId, antal-1); 
         }
     }
     else{
-        setQuantity(prodId, antal+1);       //Ändra Local storage oxå
+        setQuantity(prodId, antal+1);      
     }
 }
 
 function getQuantity(prodQuantId){
     let antalStr = document.getElementById(prodQuantId).innerText;
     let antal = parseInt(antalStr);
-    //console.log("Antal: " + antal);
     return antal;
 }
 
@@ -165,11 +186,10 @@ function setQuantity(prodId, nyAntal){
 
     //------Array-------------
     let itemIndex = cart.findIndex((item) => item.id == parseInt(prodId));
-    cart[itemIndex].antal=nyAntal;
+    cart[itemIndex].antal=nyAntal;   //Ändra Local storage oxå
 
     //------Table----------
     let antal = document.getElementById(prodQuantId);
-    //console.log("ny antal: " + nyAntal);
     antal.innerText = nyAntal.toString();
 
     let totPriceStr = document.getElementById("tot-pris " + prodId);
@@ -177,6 +197,7 @@ function setQuantity(prodId, nyAntal){
     totPriceStr.innerText = "$" + totPrice.toString();
 
     updateTotalItemsAndPrice();
+    saveToLocalStorage();
 }
 
 function updateTotalItemsAndPrice(){
@@ -184,14 +205,19 @@ function updateTotalItemsAndPrice(){
     const sumAntal = cart.map(item => item.antal).reduce((result, item) => {
         return result + item},0);
 
-    const sumPrice = cart.map(item => item.antal).reduce((sum, value, i) => sum + (value * cart.map(item => item.price)[i]), 0).toFixed(2);
+    const sumPrice = cart.map(item => item.antal).reduce((sum, value, i) => 
+                        sum + (value * cart.map(item => item.price)[i]), 0).toFixed(2);
 
     console.log("Antal: " + sumAntal + " Tot Price: " + sumPrice);
-
     
     let totAntal = document.getElementById("th-cart-total-antal");
     let totPrice = document.getElementById("th-cart-total-price");
     totAntal.innerText = sumAntal.toString();
     totPrice.innerText = "$" + sumPrice.toString();
+}
+
+function saveToLocalStorage(){
+
+    localStorage.setItem("webshopCart", JSON.stringify(cart));
 }
 
