@@ -49,7 +49,7 @@ fetch('https://fakestoreapi.com/products')
             const quantityDropdown = document.createElement('select');
             quantityDropdown.classList.add('form-select');
             quantityDropdown.setAttribute('id', "form-select " + product.id);
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 5; i++) {
                 const option = document.createElement('option');
                 option.value = i;
                 option.textContent = i;

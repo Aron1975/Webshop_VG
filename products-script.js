@@ -21,12 +21,12 @@ orderButton.addEventListener('click', () => {
 let emptyCartBtn = document.getElementById('empty-cart-btn');
 emptyCartBtn.addEventListener('click', emptyCart);
 
-// Addar element till varukorg, inputType avgör om den läggs till från LocalStorage('ls') eller via websidan('ws').
-function addItemToCart(product, inputType){
+// Addar element till varukorg, inputOrigin avgör om den läggs till från LocalStorage('ls') eller via websidan('ws').
+function addItemToCart(product, inputOrigin){
 
     let item = {};
 
-    if(inputType == "ws"){
+    if(inputOrigin == "ws"){
 
         //-----rullgardin antal-----------
         let antalItem = parseInt(document.getElementById('form-select ' + product.id).value);
