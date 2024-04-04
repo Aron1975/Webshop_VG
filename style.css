@@ -35,12 +35,10 @@ nav{
     background-color: rgb(210, 191, 191);
     margin-top: 48px;
     border-radius: 12px;
-    
 }
 
 #order-table{
   display: table;
-  /*width: 100%;*/
 }
 
 .product-info .card {
@@ -91,8 +89,6 @@ input:invalid {
     border:1px solid black;
   }
 
- 
-
   th#th-order-totprice,#th-order-price{
     width: 25%;
   }
@@ -108,13 +104,14 @@ input:invalid {
   th#th-price, #th-tot-price-text {
     width: 17%;
   }
+
   th#th-totprice {
     width: 18%;
   }
+
   th#th-rm-btn {
     width: auto;
   }
-
 
   #kund-btn-right{
     position: relative;
@@ -137,45 +134,7 @@ input:invalid {
     .offcanvas {
       width: 100% !important;
     }
-
- /*   .quant-btns-div{
-
-      font-size: 14px;
-      display: flex;
-      justify-content: center;
-    }*/
   }
-/*
-  @media screen and (width > 480px) {
-    #cart-btn{
-        font-size: 18px;
-    }
-  }
-
-  @media screen and (420 < width <= 480px) {
-    #cart-btn{
-
-        font-size: 16px;
-        border-radius: 12px;
-        
-    }
-  }
-
-  @media screen and (351px < width <= 420px) {
-    #cart-btn{
-
-        font-size: 12px;
-    }
-    
-  }
-
-
-  @media screen and (width <= 350px) {
-    #cart-btn{
-
-        font-size: 10px;
-    }
-  }*/
 
   #cart-btn{
 
@@ -195,6 +154,5 @@ input:invalid {
 
     margin-top: 0%;
     vertical-align:middle;
-    color:whitesmoke
+    color:black
   }
-

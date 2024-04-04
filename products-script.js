@@ -129,7 +129,7 @@ function addQuantButtons(cell,prodId,antal){
 
     const minusButton = document.createElement('button');
     minusButton.setAttribute('id', "quatity-minus-btn " + prodId);
-    minusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-2');
+    minusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-1');
     minusButton.style.backgroundColor="darkorange";
     minusButton.style.color="yellow";
     minusButton.textContent = '-';
@@ -143,7 +143,7 @@ function addQuantButtons(cell,prodId,antal){
 
     const plusButton = document.createElement('button');
     plusButton.setAttribute('id', "quatity-plus-btn " + prodId);
-    plusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-2');
+    plusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-1');
     plusButton.style.backgroundColor="darkorange";
     plusButton.style.color="yellow";
     plusButton.textContent = '+';
@@ -181,7 +181,7 @@ function setQuantity(prodId, nyAntal){
 
     //------Array-------------
     let itemIndex = cart.findIndex((item) => item.id == parseInt(prodId));
-    cart[itemIndex].antal=nyAntal;   //Ändra Local storage oxå
+    cart[itemIndex].antal=nyAntal;
 
     //------Table----------
     let antal = document.getElementById(prodQuantId);
