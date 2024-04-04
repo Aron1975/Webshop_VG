@@ -21,10 +21,12 @@ p.medium-size{
 nav{
     background-color:rgb(237, 222, 202);
 }
+
 .card-img-top {
     max-width: 20%;
     height: auto;
 }
+
 .btn {
     margin-top: 10px;
 }
@@ -32,6 +34,13 @@ nav{
 .product-info { 
     background-color: rgb(210, 191, 191);
     margin-top: 48px;
+    border-radius: 12px;
+    
+}
+
+#order-table{
+  display: table;
+  /*width: 100%;*/
 }
 
 .product-info .card {
@@ -82,12 +91,20 @@ input:invalid {
     border:1px solid black;
   }
 
-  th#th-prod,#th-total-antal {
+ 
+
+  th#th-order-totprice,#th-order-price{
+    width: 25%;
+  }
+
+  th#th-prod,#th-total-antal, #th-order-prod {
     width: 40%;
   }
+
   th#th-quant, #th-cart-total-antal {
     width: 18%;
   }
+
   th#th-price, #th-tot-price-text {
     width: 17%;
   }
@@ -97,6 +114,7 @@ input:invalid {
   th#th-rm-btn {
     width: auto;
   }
+
 
   #kund-btn-right{
     position: relative;
@@ -119,15 +137,22 @@ input:invalid {
     .offcanvas {
       width: 100% !important;
     }
-  }
 
+ /*   .quant-btns-div{
+
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+    }*/
+  }
+/*
   @media screen and (width > 480px) {
     #cart-btn{
         font-size: 18px;
     }
   }
 
-  @media screen and (420 < width >= 480px) {
+  @media screen and (420 < width <= 480px) {
     #cart-btn{
 
         font-size: 16px;
@@ -141,6 +166,7 @@ input:invalid {
 
         font-size: 12px;
     }
+    
   }
 
 
@@ -149,12 +175,26 @@ input:invalid {
 
         font-size: 10px;
     }
-  }
-    #cart-btn{
+  }*/
 
-        color: rgb(62, 96, 54);
-        background-color: rgb(212, 200, 182);
-        border: none;
-        border-radius: 50%;
-    }
+  #cart-btn{
+
+      color: rgb(62, 96, 54);
+      background-color: rgb(212, 200, 182);
+      border: none;
+      border-radius: 50%;
+  }
+
+  .quant-btns-div{
+
+    font-weight: bold;
+    display: inline-flex;
+  }
+
+  .quant-btns-div > span{
+
+    margin-top: 0%;
+    vertical-align:middle;
+    color:whitesmoke
+  }
 

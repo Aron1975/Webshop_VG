@@ -59,8 +59,9 @@ function addItemToCart(product, inputOrigin){
 
     //-----------Tabellen---------------
     const table = document.getElementById("cart-table");
-    
-    let newRow = table.insertRow();
+    const antalRader = table.rows.length;
+    console.log("Antal rader: " + antalRader);
+    let newRow = table.insertRow(antalRader-1);
     newRow.setAttribute('id', product.id);
     for(let i=0; i<5; i++){
         newRow.insertCell(i);
@@ -88,7 +89,7 @@ function addItemToCart(product, inputOrigin){
 function emptyCart(){
 
     const table = document.getElementById("cart-table");
-    while(table.rows.length>1){
+    while(table.rows.length>2){
         table.deleteRow(1);
     }
 
@@ -128,22 +129,32 @@ function resetAddButtons(id){
 
 function addQuantButtons(cell,prodId,antal){
 
+    const quantBtnsDiv = document.createElement('div');
+    quantBtnsDiv.classList.add("quant-btns-div");
+
     const minusButton = document.createElement('button');
     minusButton.setAttribute('id', "quatity-minus-btn " + prodId);
-    minusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-1');
+    minusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-2');
+    minusButton.style.backgroundColor="darkorange";
+    minusButton.style.color="yellow";
     minusButton.textContent = '-';
-    cell.appendChild(minusButton);
+    quantBtnsDiv.appendChild(minusButton);
 
     const antalSpan = document.createElement('span');
-    antalSpan.setAttribute('id', "prod-quantity " + prodId);  
+    antalSpan.setAttribute('id', "prod-quantity " + prodId);
+    antalSpan.style.marginTop="11%";
     antalSpan.textContent = antal;
-    cell.appendChild(antalSpan);
+    quantBtnsDiv.appendChild(antalSpan);
 
     const plusButton = document.createElement('button');
     plusButton.setAttribute('id', "quatity-plus-btn " + prodId);
-    plusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-1');
+    plusButton.classList.add('btn', 'btn-secondary', 'btn-sm', 'm-2');
+    plusButton.style.backgroundColor="darkorange";
+    plusButton.style.color="yellow";
     plusButton.textContent = '+';
-    cell.appendChild(plusButton);
+    quantBtnsDiv.appendChild(plusButton);
+
+    cell.appendChild(quantBtnsDiv);
 
     minusButton.addEventListener('click', changeQuantity);
     plusButton.addEventListener('click', changeQuantity);
