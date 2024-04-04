@@ -6,16 +6,12 @@ let cart = [];
     if (webshopCart != null){
         webshopCart.forEach(item => {addItemToCart(item, "ls");
         });
-    } 
-    //cart = webshopCart; 
-    console.log(cart);
+    }
 })();
 
 let orderButton = document.getElementById("order-btn");
 orderButton.addEventListener('click', () => {
-            //window.location.href = `beställning.html?productId=${product.id}`;
             window.location.href = `beställning.html`;
-       // alert("Beställ");
     });
 
 let emptyCartBtn = document.getElementById('empty-cart-btn');
@@ -28,10 +24,10 @@ function addItemToCart(product, inputOrigin){
 
     if(inputOrigin == "ws"){
 
-        //-----rullgardin antal-----------
+        //--------rullgardin antal---------
         let antalItem = parseInt(document.getElementById('form-select ' + product.id).value);
 
-        //--------cart Array-----------
+        //----------cart Array-------------
         item = {
             id: product.id,
             name: product.title,
@@ -53,14 +49,13 @@ function addItemToCart(product, inputOrigin){
     }
 
     cart.push(item);
-    console.log(cart);
+    //console.log(cart);
     
     //------------------------------
 
     //-----------Tabellen---------------
     const table = document.getElementById("cart-table");
     const antalRader = table.rows.length;
-    console.log("Antal rader: " + antalRader);
     let newRow = table.insertRow(antalRader-1);
     newRow.setAttribute('id', product.id);
     for(let i=0; i<5; i++){
