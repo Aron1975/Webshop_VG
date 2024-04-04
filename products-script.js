@@ -137,7 +137,8 @@ function addQuantButtons(cell,prodId,antal){
 
     const antalSpan = document.createElement('span');
     antalSpan.setAttribute('id', "prod-quantity " + prodId);
-    antalSpan.style.marginTop="11%";
+    antalSpan.style.marginTop="10%";
+    antalSpan.style.fontSize="14px";
     antalSpan.textContent = antal;
     quantBtnsDiv.appendChild(antalSpan);
 
